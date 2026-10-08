@@ -34,7 +34,7 @@ export default function Home() {
           <span className="inline-flex items-center gap-2 rounded-md border border-accent/20 bg-accent/5 px-2.5 py-1 font-mono text-xs tracking-widest text-accent"><span className="size-1.5 rounded-full bg-accent" />SANDBOX</span>
         </div>
       </header>
-      <main id="main" className="mx-auto max-w-7xl px-6 pb-12 pt-10 sm:px-10 sm:pt-14">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-7xl px-6 pb-12 pt-10 focus:outline-none sm:px-10 sm:pt-14">
         <div className="mb-9 flex flex-wrap items-center gap-2 font-mono text-xs text-muted"><span>WORKSPACE</span><span aria-hidden="true" className="px-1">/</span><span className="text-foreground">INTEGRATION OVERVIEW</span></div>
         <section aria-labelledby="dashboard-heading" className="mb-9">
           <div className="mb-4 flex items-center gap-2 text-xs font-medium text-accent"><span className="h-px w-6 bg-accent" /> BUILD. CONNECT. VERIFY.</div>

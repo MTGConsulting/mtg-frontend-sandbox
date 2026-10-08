@@ -1,0 +1,14 @@
+---
+description: App Router, typed integration data, and dashboard preservation
+globs: "app/**/*,next.config.ts,tsconfig.json,postcss.config.mjs,eslint.config.mjs"
+alwaysApply: false
+---
+
+Read `docs/standards/architecture.md` before changing application code or framework configuration.
+
+- Keep static content in Server Components. Add client boundaries only for actual browser interaction.
+- Use `app/integrations.ts` as the single typed integration dataset. Derive all integration counts from it.
+- Preserve all six cards, the four original visible text lines, dark tokens, responsive grids, and historical/demonstration labeling.
+- Keep small labels at least `text-xs`; preserve semantic headings, the skip link, keyboard focus, and non-color status labels.
+- Use Tailwind v4 tokens and complete utility strings. Do not add duplicate framework configuration or dependencies without a scoped need.
+- Run build, lint, and TypeScript validation for application changes; do not weaken checks to obtain a pass.

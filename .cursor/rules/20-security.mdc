@@ -1,0 +1,13 @@
+---
+description: Secret handling, truthful status reporting, and production safety
+globs: ""
+alwaysApply: true
+---
+
+Read `docs/standards/security.md` before working with configuration, dependencies, external tools, or potentially sensitive data.
+
+- Do not print or copy secret values, environment dumps, credential files, or personal MCP configuration. Use placeholders when documenting configuration.
+- No authentication, APIs, databases, telemetry services, or secrets are required for the current static dashboard.
+- Historical/demo statuses do not establish live connectivity, deployment isolation, or production safety. Do not label a service verified without scoped evidence.
+- Do not run forced audit fixes, conceal findings, or downgrade tooling to make an audit pass. Record inherited findings separately from new issues.
+- Do not upload repository content, send messages, or change external systems without authorization. Report accidental exposure without repeating the value.

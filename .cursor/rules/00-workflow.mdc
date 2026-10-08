@@ -1,0 +1,13 @@
+---
+description: Repository workflow, task ownership, and approval boundaries
+globs: ""
+alwaysApply: true
+---
+
+Read `AGENTS.md` and the active task before substantive work. Read `docs/standards/branching.md` before Git mutations.
+
+- Confirm branch and working-tree state; preserve existing changes. Phase 1.1 belongs on `test/cursor-agent-validation`.
+- Keep task scope, file ownership, acceptance evidence, and blockers in `docs/tasks/`. Use `docs/tasks/TEMPLATE.md` for a new substantive task.
+- Use the coordinator, implementer, reviewer, and validator roles described in `AGENTS.md`. Roles may run sequentially; do not claim independent agents ran unless they did. Delegation requires authorization and non-overlapping write ownership.
+- Run the relevant validations and report real results, not inferred integration health.
+- Do not commit or push without user approval. Do not merge, deploy, alter production, or introduce external integrations without explicit authorization for that action.

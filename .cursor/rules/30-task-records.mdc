@@ -1,0 +1,13 @@
+---
+description: Evidence-based task records and engineering standards
+globs: "docs/**/*.md,AGENTS.md,.cursor/rules/*.mdc"
+alwaysApply: false
+---
+
+Use `docs/tasks/TEMPLATE.md` for substantive tasks and `AGENTS.md` as the shared entry point.
+
+- Record baseline, branch, authorized scope, ownership, acceptance criteria, commands, outcomes, and limitations.
+- Keep standards canonical in `docs/standards/`; Cursor rules should summarize their requirements and point to them.
+- Distinguish local repository validation from Cursor rule activation, independent agent review, and external integration validation.
+- Keep completed evidence separate from pending manual steps. Do not mark a task fully accepted while a required acceptance check remains pending.
+- Validate links, frontmatter, glob scopes, and consistency after guidance changes. Do not put secrets or personal machine settings in examples.

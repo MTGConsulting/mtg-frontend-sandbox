@@ -1,9 +1,5 @@
-import {
-  formatCount,
-  integrationCounts,
-  integrations,
-  integrationStatusLabels,
-} from "../integrations";
+import { formatCount, integrationCounts, integrations } from "../integrations";
+import { IntegrationStatusBadge } from "./integration-status-badge";
 
 export function IntegrationGrid() {
   return (
@@ -23,10 +19,7 @@ export function IntegrationGrid() {
           <article key={integration.name} className="group flex flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent/40">
             <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
               <span aria-hidden="true" className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-canvas font-mono text-sm font-semibold tracking-tight text-foreground">{integration.initials}</span>
-              <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${integration.status === "historical" ? "border-success/20 bg-success/5 text-success" : "border-line bg-canvas text-muted"}`}>
-                <span aria-hidden="true" className={`size-1.5 shrink-0 rounded-full ${integration.status === "historical" ? "bg-success" : "bg-muted"}`} />
-                {integrationStatusLabels[integration.status]}
-              </span>
+              <IntegrationStatusBadge status={integration.status} />
             </div>
             <p className="mb-2 font-mono text-xs tracking-[0.14em] text-muted">{integration.category}</p>
             <h3 className="text-lg font-semibold tracking-tight">{integration.name}</h3>
