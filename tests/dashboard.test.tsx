@@ -1,11 +1,14 @@
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "../app/page";
 import { IntegrationStatusBadge } from "../app/components/integration-status-badge";
 import {
   formatCount,
   integrationCounts,
+  integrationStatusLabels,
   integrations,
   type IntegrationStatus,
 } from "../app/integrations";
@@ -31,6 +34,17 @@ test("counts derive from the records and format as 06 / 03 / 03", () => {
   assert.deepEqual(Object.values(integrationCounts).map(formatCount), ["06", "03", "03"]);
 });
 
+test("integrationCounts is computed from the integrations array, not numeric literals", () => {
+  const source = readFileSync(fileURLToPath(new URL("../app/integrations.ts", import.meta.url)), "utf8");
+  const counts = source.match(/export const integrationCounts = \{([\s\S]*?)\n\};/);
+  assert.ok(counts, "integrationCounts export is present");
+  const body = counts[1];
+  assert.match(body, /total:\s*integrations\.length/);
+  assert.match(body, /historical:\s*integrations\.filter\(\(\{ status \}\) => status === "historical"\)\.length/);
+  assert.match(body, /demonstration:\s*integrations\.filter\(\(\{ status \}\) => status === "demonstration"\)\.length/);
+  assert.doesNotMatch(body, /\b\d+\b/);
+});
+
 const badgeCases: readonly [IntegrationStatus, string][] = [
   ["historical", "Historical record"],
   ["demonstration", "Demonstration only"],
@@ -47,15 +61,26 @@ for (const [status, label] of badgeCases) {
   });
 }
 
-test("the dashboard renders exactly six cards with the original names", () => {
+test("each dashboard card renders its name with the matching status badge and hidden dot", () => {
   const markup = renderToStaticMarkup(<Home />);
   const cards = [...markup.matchAll(/<article\b[^>]*>(.*?)<\/article>/g)];
   assert.equal(cards.length, 6);
-  assert.deepEqual(cards.map(([, card]) => {
+  const expected = integrations.map(({ name, status }) => ({
+    name,
+    label: integrationStatusLabels[status],
+  }));
+  assert.deepEqual(cards.map(([, card], index) => {
     const headings = [...card.matchAll(/<h3\b[^>]*>([^<]+)<\/h3>/g)];
-    assert.equal(headings.length, 1);
-    return headings[0][1];
-  }), originalNames);
+    assert.equal(headings.length, 1, `card ${index} has one heading`);
+    const badges = [...card.matchAll(/<span\b([^>]*)><span\b([^>]*)><\/span>([^<]+)<\/span>/g)];
+    assert.equal(badges.length, 1, `card ${index} contains exactly one status badge`);
+    assert.doesNotMatch(badges[0][1], /aria-hidden=/);
+    assert.match(badges[0][2], /\baria-hidden="true"/);
+    const emptyHidden = [...card.matchAll(/<span\b[^>]*\baria-hidden="true"[^>]*><\/span>/g)];
+    assert.equal(emptyHidden.length, 1, `card ${index} has one empty decorative dot`);
+    return { name: headings[0][1], label: badges[0][3] };
+  }), expected);
+  assert.deepEqual(expected.map(({ name }) => name), originalNames);
 });
 
 test("the dashboard displays the derived summary counts with their labels", () => {

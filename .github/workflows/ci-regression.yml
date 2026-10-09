@@ -19,10 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      # v4.4.0; SHA from https://api.github.com/repos/actions/checkout/git/refs/tags/v4
+      # and https://api.github.com/repos/actions/checkout/releases/tags/v4.4.0 (2026-07-20)
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      # v4.4.0; SHA from https://api.github.com/repos/actions/setup-node/git/refs/tags/v4
+      # and https://api.github.com/repos/actions/setup-node/releases/tags/v4.4.0 (2025-04-14)
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "24"
       - run: npm ci
