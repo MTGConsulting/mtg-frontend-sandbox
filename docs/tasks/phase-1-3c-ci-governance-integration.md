@@ -3,18 +3,19 @@
 ## Identity and status
 
 - Phase / task ID: 1.3C-B
-- Status: Gate 1 **complete** at `7a935860f93e18169343fad14329475cb7f94da4`. Gate 2 workflow-trigger change and this correction are prepared in the working tree and **not committed**.
-- Pre-commit status (preserved; superseded by the status line above and by the post-merge update): in progress (Stage A prepared; **integration merge commit not created**; Gate 1 pending)
+- Status (current, 2026-10-09 Gate 4A preparation; this correction is **not committed**): Gates 1–4 are complete. Gate 5 protected-branch merge is **not authorized**.
+- Historical status preserved from the text Codex reviewed in `d6ce121` (superseded; not current): Gate 1 **complete** at `7a935860f93e18169343fad14329475cb7f94da4`. The sentence "Gate 2 workflow-trigger change and this correction are prepared in the working tree and **not committed**" was true only before that commit. Gate 2 was later committed as `d6ce121`, published, and exercised by draft PR #3.
+- Pre-commit status (preserved; superseded): in progress (Stage A prepared; **integration merge commit not created**; Gate 1 pending)
 - Owner / execution tool: Dieudonne / Cursor Lead
 - Date: 2026-10-09
-- Branch: `cursor/phase-1-3c-ci-integration` (local only; not pushed)
+- Branch: `cursor/phase-1-3c-ci-integration` @ `d6ce121556929b472df09a10fef1291ee91c4e29`, published (Gate 3). Historical note preserved: before Gate 3 this line said the branch was local only and not pushed.
 - Baseline ref and commit: governance `8617f3074c20d4376657a7cd0c2bba3e138fe49d`; CI `fbe2eb563863e185946e70603255cbbd94ae0c17`; merge-base `64006e86c62726326439e0a095f6b2e386822c7e`
 - Initial working-tree state (pre-commit record, preserved): active sandbox left on `test/cursor-agent-validation` @ `81e20a1c55b15a9533d271075c44893a5e5293e0` (clean). Isolated worktree held an uncommitted `--no-ff` merge. That merge was later committed as `7a93586`.
 - Instructions read: `AGENTS.md`, ADR 0002, ADR 0003, branching, architecture-review, artifact-handoff, agent-authority, security, architecture, Phase 1.3B closure record
 
 ## Objective and authorized scope
 
-Prepare Option A: a non-fast-forward merge of the validated Phase 1.3B CI history into a branch created from the accepted governance baseline, preserving both parents. Pre-commit record (preserved): this file was not yet part of a merge commit, and workflow-trigger refinement had not started. Both of those statements were later superseded: the file is in merge commit `7a93586`, and Gate 2 trigger preparation is uncommitted in the working tree.
+Prepare Option A: a non-fast-forward merge of the validated Phase 1.3B CI history into a branch created from the accepted governance baseline, preserving both parents. Historical preparation record (preserved, superseded): this file was not yet part of a merge commit, and workflow-trigger refinement had not started. As written inside `d6ce121`, a later sentence said Gate 2 trigger preparation was still uncommitted in the working tree. That sentence is not current. Gate 1 is `7a93586`, Gate 2 is `d6ce121`, Gate 3 published that commit, and Gate 4 opened draft PR #3. Gate 5 is not approved.
 
 ## Task-level authority assignment
 
@@ -48,9 +49,9 @@ Exclusions until later gates: workflow trigger edits, concurrency, commit, push,
 - [x] Staged manifest is exactly the seven CI-side files.
 - [x] `app/` and accepted governance paths are unchanged versus `8617f30`.
 - [x] Isolated validation recorded below (not an independent review of a commit).
-- [ ] Owner approves Gate 1 merge commit (not done).
-- [ ] Stage B workflow refinement (not started).
-- [ ] AIR-0006 remains open until CI is validated on the governance baseline.
+- [ ] Owner approves Gate 1 merge commit (not done). Historical checklist item, preserved. Gate 1 was later completed at `7a93586`.
+- [ ] Stage B workflow refinement (not started). Historical checklist item, preserved. Gate 2 was later completed at `d6ce121`.
+- [ ] AIR-0006 remains open until CI is validated on the governance baseline. Still true. Hosted CI on draft PR #3 does not close it.
 
 ## Ownership and coordination
 
@@ -124,15 +125,62 @@ Workflow trigger redesign stays a separate commit.
 - Delegation evidence: not started.
 - Pre-commit review status (preserved): independent Codex review had not started because no commit SHA existed yet. Architecture cross-review remained PENDING until before protected-branch integration. Approvals then still required were Gate 1 and, separately, Gates 2–5.
 
-## Post-merge update (2026-10-09)
+## Post-merge update (2026-10-09, historical text inside `d6ce121`)
 
-This section is the current state. The pre-commit sentences above are kept as the historical narrative and were accurate only before the merge commit.
+This section is **not** the current state. It is the narrative committed in `d6ce121` before Gate 3 publication and Gate 4 hosted CI. The pre-commit sentences above it were accurate only before the merge commit. The Gate 4A section below is the current status.
 
 - Gate 1 **completed**. Merge commit: `7a935860f93e18169343fad14329475cb7f94da4`. Tree: `40e7c7616c011bfe564c65c5a45a2a037d9c371f`.
 - Verified parents, in order: `8617f3074c20d4376657a7cd0c2bba3e138fe49d` (governance) and `fbe2eb563863e185946e70603255cbbd94ae0c17` (validated CI). Neither parent was rewritten.
 - Diff versus the first parent at that commit: the seven CI-side files plus this task record.
-- Independent Codex review of `7a93586` (session `01a11f73-cff7-7a42-a392-49fc758542a4`): **WARN**. Structural checks passed. The WARN was stale pre-commit wording in this file (then at lines 6, 16, 102, and 106) that still described an uncommitted merge. Those sentences are now explicitly labeled pre-commit. This correction is not yet committed, so Codex has not reviewed it.
-- Gate 2 **preparation** (uncommitted working tree): `.github/workflows/ci-regression.yml` trigger and job `if` only. Same-repository pull requests targeting `main`, `test/cursor-agent-validation`, `test/v0-integration`, and `v0/integration-dashboard`; push and `workflow_dispatch` only on those four refs. No concurrency. Pins, Node 24, `ubuntu-24.04`, `contents: read`, `persist-credentials: false`, and non-deploying steps unchanged. Not a hosted-trigger proof.
-- AIR-0006 remains **open**. Level 2/2+ remains inactive. Five inherited high dev advisories remain OPEN—TRACKED.
-- Not authorized by this preparation: Gate 2 commit, push, pull request, protected-branch merge, ruleset or Vercel changes.
-- Approvals still required: Gate 2 commit, then separately Gates 3–5. ChatGPT R2 remains PENDING before Gate 5.
+- Independent Codex review of `7a93586` (session `01a11f73-cff7-7a42-a392-49fc758542a4`): **WARN**. Structural checks passed. The WARN was stale pre-commit wording in this file (then at lines 6, 16, 102, and 106) that still described an uncommitted merge. Historical note inside `d6ce121`: "This correction is not yet committed, so Codex has not reviewed it." That note described the Gate 2 working tree before commit `d6ce121`. Codex later reviewed `d6ce121` and returned WARN again because Gate 2 was still described as uncommitted. This Gate 4A edit labels that wording historical. It is not itself committed, so Codex has not reviewed this edit.
+- Gate 2 **preparation** (historical, as written in `d6ce121`; the working tree is no longer uncommitted): `.github/workflows/ci-regression.yml` trigger and job `if` only. Same-repository pull requests targeting `main`, `test/cursor-agent-validation`, `test/v0-integration`, and `v0/integration-dashboard`; push and `workflow_dispatch` only on those four refs. No concurrency. Pins, Node 24, `ubuntu-24.04`, `contents: read`, `persist-credentials: false`, and non-deploying steps unchanged. The sentence that this was "not a hosted-trigger proof" was true at commit time. Hosted proof came later on draft PR #3; see the Gate 4A section.
+- AIR-0006 remains **open**. Level 2/2+ remains inactive. Five inherited high dev advisories remain OPEN—TRACKED. These three statements remain current.
+- Historical authorization note inside `d6ce121` (superseded for Gates 2–4): "Not authorized by this preparation: Gate 2 commit, push, pull request, protected-branch merge, ruleset or Vercel changes." Gates 2, 3, and 4 were later authorized and completed. Gate 5 and ruleset or Vercel changes remain unauthorized.
+- Historical approval note inside `d6ce121` (superseded for Gates 2–4): "Approvals still required: Gate 2 commit, then separately Gates 3–5. ChatGPT R2 remains PENDING before Gate 5." Gate 2, publication, and the draft PR are done. ChatGPT R2 was later owner-relayed as WARN. Gate 5 is still required and is not approved.
+
+## Gate 4A current status (2026-10-09)
+
+This section is the current status. It is uncommitted. It does not approve Gate 5.
+
+| Gate | State |
+| --- | --- |
+| Historical preparation | Preserved above. The uncommitted merge and the "Gate 2 not committed" sentences are historical. |
+| Gate 1 merge | **Complete.** `7a935860f93e18169343fad14329475cb7f94da4`. Parents `8617f3074c20d4376657a7cd0c2bba3e138fe49d` and `fbe2eb563863e185946e70603255cbbd94ae0c17`. Tree at that commit `40e7c7616c011bfe564c65c5a45a2a037d9c371f`. |
+| Gate 2 workflow commit | **Complete.** `d6ce121556929b472df09a10fef1291ee91c4e29`. Tree `afb7b3edfb00ff8f7ff1ede6744fe1c1d370af44`. Parent `7a93586`. |
+| Gate 3 publication | **Complete.** `cursor/phase-1-3c-ci-integration` points at `d6ce121`. |
+| Gate 4 draft PR and hosted CI | **Complete.** Draft PR [https://github.com/MTGConsulting/mtg-frontend-sandbox/pull/3](https://github.com/MTGConsulting/mtg-frontend-sandbox/pull/3). Base `test/cursor-agent-validation` @ `8617f30`. Not merged. |
+| Gate 5 protected-branch merge | **Not authorized.** |
+
+### Hosted CI evidence
+
+Workflow run [37897731007](https://github.com/MTGConsulting/mtg-frontend-sandbox/actions/runs/37897731007):
+
+- Event: `pull_request`.
+- Head commit: `d6ce121556929b472df09a10fef1291ee91c4e29`.
+- Runner: `ubuntu-24.04`.
+- Job `checks` (`113712838462`): SUCCESS. The job executed; it was not skipped.
+- Steps succeeded: checkout (pinned Actions v5), Node.js 24 setup, `npm ci`, lint, typecheck, Webpack build, test.
+- Tests: 9 passed, 0 failed, 0 skipped.
+- Check Run `113712838462` annotation count: 0.
+- The workflow does not deploy or publish artifacts.
+
+This run validates CI on the draft integration PR. It does **not** mean CI is integrated into `test/cursor-agent-validation`.
+
+### Vercel evidence
+
+- Preview deployment `6955107642` for commit `d6ce121556929b472df09a10fef1291ee91c4e29`: environment Preview, status success. URL: `https://mtg-frontend-sandbox-ajd2rwwkl-dntakwih-7387.vercel.app`.
+- Production remains the reported deployment of `main` @ `71e890656b6c9a4874600e62379a4f50b2a23f35` (deployment `6931327192`, 2026-10-08).
+- That is observed GitHub deployment history. Vercel project configuration was not independently inspected. No Production deployment is authorized.
+
+### Residual risks (unchanged)
+
+- Five inherited high-severity development advisories for [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm): **OPEN—TRACKED**. Not resolved.
+- AIR-0006: **OPEN** until CI is integrated into the accepted governance baseline.
+- Browser keyboard, focus, and zoom: **NOT VERIFIED**. Accepted limitation from Phase 1.3B. Not marked PASS.
+- Codex review of `d6ce121` (session `01a11f7b-64aa-7082-8200-1d391530de61`): **WARN**. The workflow structure passed. The WARN was stale "not committed" wording, which this section now labels historical. Codex has not reviewed this uncommitted Gate 4A edit.
+- ChatGPT R2: **WARN**, owner-relayed, not independently retrieved. Packet SHA-256 `6a61e63521e043824c6e3e2af1ced599d5bbbfe3654f5dd844c092372fbeaa7a`.
+- Level 2/2+ authority: **INACTIVE**.
+- Protected-branch merge: **NOT AUTHORIZED**.
+- No GoIdentity, MerryGO, financial, or other SuperApp service is implemented. The static dashboard plus offline regression tests and this CI workflow are the implemented scope.
+
+Gate 4A documentation commit and push are not authorized by preparing this section.
