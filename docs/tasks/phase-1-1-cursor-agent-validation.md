@@ -113,3 +113,7 @@ Validation: exact-paragraph comparison, unique ordered Sections 1–26, local li
 ## Cursor activation evidence update — 2026-10-08
 
 User supplied terminal Cursor version 3.23.23 (commit 2dac2428994fe34f12658d9ecad1541b98db2c00, x64), and reported workflow/security/AGENTS context attachments plus scoped architecture/task rule attachments. This is indirect evidence; the native Cursor rule/context display remains unobserved. Phase 1.1 activation acceptance is still open. Native badge implementation and independent code review have since been recorded in the [Phase 1.2 task](phase1-cursor-validation.md); its browser evidence has remaining real keyboard/zoom checks. Earlier NOT RUN entries describe their historical checkpoints.
+
+## Commit status — 2026-10-08 (Phase 1.3A)
+
+The Phase 1.1 guidance files and the Phase 1.2 badge extraction are now committed together in `64006e8` on `test/cursor-agent-validation`; the "uncommitted" and `2ed4f62`-as-HEAD statements above describe earlier states. Activation acceptance remains open: no native Cursor active-rule display has been observed. See the [Phase 1.3A record](phase-1-3a-baseline-reconciliation.md).

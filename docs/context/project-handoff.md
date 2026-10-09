@@ -18,6 +18,8 @@
 > Repository mapping: retain the existing numbered `.cursor/rules/*.mdc` files rather than duplicating the proposed rule names in Section 22. `docs/tasks/task-template.md` points to the existing canonical template; `docs/tasks/phase1-cursor-validation.md` specifies the native Cursor badge task. The earlier `phase-1-1-cursor-agent-validation.md` records rules setup, not completed Phase 1.2 implementation. Architecture documents distinguish future platform proposals from the implemented static sandbox. Sections 13–18 and 25–26 are preserved as supplied.
 >
 > Permission clarification: historical commits, connections, and previews are evidence only, not authorization to publish changes. Current work excludes forced audit fixes, commits, pushes, merges, and deployments. Do not run the sample `git remote -v` command if URLs could disclose credentials; inspect only sanitized host/repository identity when needed.
+>
+> Status update (2026-10-08, Phase 1.3A): the notes above describe earlier checkpoints and are preserved. Current reference is commit `64006e86c62726326439e0a095f6b2e386822c7e` on `test/cursor-agent-validation` (parent `2ed4f62`); Phase 1.1 guidance and the Phase 1.2 badge extraction are committed there, and the commit also adds `tabIndex={-1}` on `<main>`. Build, lint, typecheck, and generated-content checks for that exact commit passed in a disposable copy. Still open: observed Cursor rule activation, real Tab → Enter and actual 200% zoom checks, and independent review of the complete application delta. See the [Phase 1.3A record](../tasks/phase-1-3a-baseline-reconciliation.md). Body sections below remain as supplied and may refer to earlier states.
 
 # PART I — BUSINESS CONTEXT
 

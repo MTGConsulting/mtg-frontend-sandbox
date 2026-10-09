@@ -94,3 +94,11 @@ Measurements used DOM geometry, computed styles, and accessibility snapshot. Scr
 Reported development side effects were reverted: Next.js appended its generated agent-rules block to `AGENTS.md`, and rewrote route imports in `next-env.d.ts` to `.next/dev/…`. Current local inspection confirms AGENTS.md has no generated marker and next-env.d.ts has no diff against HEAD. A future dev run may regenerate these changes. No `agentRules` configuration change was made.
 
 **Disposition: code review and automated checks remain PASS; Phase 1.2 acceptance remains open.** Required evidence is the observed Cursor active-rule display and a real Tab → Enter check at actual 200% browser zoom. A `tabIndex={-1}` change to main is an optional separate scope decision, not part of this badge extraction. No implementation change, install, commit, push, merge, or deployment was performed during this evidence update.
+
+## Phase 1.3A reconciliation — 2026-10-08
+
+Commit `64006e8` now contains the Phase 1.1 guidance and the Phase 1.2 badge extraction; the "uncommitted" and `2ed4f62`-is-HEAD wording above describes earlier checkpoints. The commit also changes `app/page.tsx` (`tabIndex={-1}` and `focus:outline-none` on `<main>`), which the independent review did not cover because the page was unchanged when it ran. Full evidence and commands are in the [Phase 1.3A record](phase-1-3a-baseline-reconciliation.md).
+
+Re-run results for the exact commit (Cursor Agent, temp copy, production build): build, lint, typecheck, and `git diff --check` PASS. Generated content preserved. Activating the skip link at DOM level now moves `document.activeElement` to `<main>`, which resolves the earlier "main focus" WARN. The 160px overflow also exists in parent `2ed4f62` with identical elements, so it is inherited, not a badge regression. Reflow at 640px and 320px is PASS by viewport emulation.
+
+Still open: real Tab → Enter and actual 200% browser zoom (the embedded browser page never held keyboard focus, so key events did not reach it) and observed native Cursor active-rule display. **Disposition unchanged: Phase 1.2 code review and automated checks PASS; full acceptance pending the two manual checks or an explicit project-owner decision accepting the limitation.** The `main` focus change still needs independent review.
