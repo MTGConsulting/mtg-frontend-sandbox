@@ -91,6 +91,7 @@ No `rejected-alternative` entries exist yet; none may be recorded without an own
   - 2026-10-08 Cursor Agent: opened.
   - 2026-10-08 Cursor Agent: the owner's later instruction to eliminate reliance on inaccessible session attachments is addressed by the proposed artifact handoff standard. The Phase 1.3B artifacts remain unretrieved; recovery is a separate owner decision (see ADR 0003, questions still open, item 4: the Phase 1.3B recovery route).
   - 2026-10-08 Cursor Agent: the owner accepted ADR 0003, which makes GitHub assigned task branches the preferred delivery mechanism. The Phase 1.3B artifacts remain unretrieved and the commit unpublished; the entry stays `open`. Status changes are the owner's.
+  - 2026-10-09 Cursor Agent (Phase 1.3B-F, proposed until owner-approved commit): the exact Phase 1.3B/CI history was published to `devin/phase-1-3b-ci-regression-tests` and independently reviewed. Durable local bundle SHA-256 `5a8a921b4bcb202fa335129a4dc01661fcbe005841d026b085fa04139160887a` remains. Tier 2 private storage is still unprovisioned. Entry stays `open`.
 
 ### AIR-0002 — Tiered artifact delivery with exact-SHA verification
 - Classification: proposed-improvement
@@ -193,6 +194,10 @@ No `rejected-alternative` entries exist yet; none may be recorded without an own
 - Sensitivity: public-safe
 - History:
   - 2026-10-08 Cursor Agent: opened.
+  - 2026-10-09 Cursor Agent (Phase 1.3B-F, proposed until owner-approved commit): CI and dashboard regression tests exist at `fbe2eb563863e185946e70603255cbbd94ae0c17` on `devin/phase-1-3b-ci-regression-tests`. GitHub Actions run 37891845102 succeeded (9/9 tests). The reference commit `64006e8` still has no CI. This line is not on `test/cursor-agent-validation` @ `81e20a1` or on `main`. The Related field above is left as originally written (historical: unpublished/unreviewed at opening). Entry stays `open`; do not treat hosted CI as governance-baseline coverage.
+  - 2026-10-09 Owner (Dieudonne), recorded by Cursor Agent: accepted the successful CI implementation on `devin/phase-1-3b-ci-regression-tests` for Phase 1.3B closure. Entry stays `open` until that CI is integrated with governance `81e20a1` / `test/cursor-agent-validation`. Integration is not authorized by this disposition.
+  - 2026-10-09 Cursor Agent: Phase 1.3B recorded ACCEPTED WITH RESIDUAL RISKS after Codex re-review `01a11f50-9e2e-77f0-b8d4-c90870688c77` (WARN, no substantive finding). Closure documentation is not committed (Gate C). This entry remains `open`.
+  - 2026-10-09 Owner (Dieudonne), recorded by Cursor Agent (ChatGPT architecture-review alignment): owner dispositions approved; technical CI completion accepted on the development branch; AIR-0006 stays `open` until governance-baseline integration. Publication of closure records is not authorized. Do not treat the prior residual-risk acceptance line as Gate C, Gate D, or a protected-branch merge.
 
 ### AIR-0007 — No verified delivery path for mandatory ChatGPT architecture review
 - Classification: confirmed-fact
@@ -214,6 +219,8 @@ No `rejected-alternative` entries exist yet; none may be recorded without an own
   - 2026-10-08 Cursor Agent: opened.
   - 2026-10-08 Cursor Agent: the owner's direction fixes the gate rule (a ChatGPT FAIL blocks acceptance or merge, not publication to an assigned branch). The delivery path (E13) remains unverified; no ChatGPT review has occurred.
   - 2026-10-08 Cursor Agent: the owner accepted ADR 0003 with the clarification that a ChatGPT FAIL or ESCALATE blocks implementation acceptance or protected-branch merge until owner disposition. The delivery path (E13) is still unverified, so any required review is `PENDING`.
+  - 2026-10-09 Cursor Agent (Phase 1.3B-F, proposed until owner-approved commit): owner-relayed ChatGPT R2 packets for Phase 1.3B-R and PR #1 returned WARN (no blocking architectural finding). Direct read-only GitHub access (E13) remains unverified. Entry stays `open`.
+  - 2026-10-09 Owner (Dieudonne), recorded by Cursor Agent: accepted reconstructed ChatGPT (and Codex) review outcomes as historical evidence for Phase 1.3B. Missing original review artifacts and packet hashes remain documented limitations. Direct path E13 remains unverified. Entry stays `open`.
 
 ### AIR-0008 — Model availability and reasoning settings are tool-specific and unverified
 - Classification: confirmed-fact
