@@ -1,0 +1,74 @@
+name: Dashboard regression checks
+
+# pull_request.branches filters the PR base (target), not the head.
+# Default activity types are opened, synchronize, and reopened, so closing
+# or merging a PR does not emit a second pull_request run. The merge commit
+# is checked by the push event on the protected base instead.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - test/cursor-agent-validation
+      - test/v0-integration
+      - v0/integration-dashboard
+  push:
+    branches:
+      - main
+      - test/cursor-agent-validation
+      - test/v0-integration
+      - v0/integration-dashboard
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  checks:
+    # Same-repository PRs only: head.repo.full_name excludes forks.
+    # Push and workflow_dispatch run only on the four protected baselines.
+    # && and || are short-circuiting, so pull_request payload fields are
+    # not read for push or workflow_dispatch.
+    if: >-
+      (github.event_name == 'pull_request'
+        && github.event.pull_request.head.repo.full_name == github.repository
+        && (github.event.pull_request.base.ref == 'main'
+          || github.event.pull_request.base.ref == 'test/cursor-agent-validation'
+          || github.event.pull_request.base.ref == 'test/v0-integration'
+          || github.event.pull_request.base.ref == 'v0/integration-dashboard'))
+      || (github.event_name == 'push'
+        && (github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/test/cursor-agent-validation'
+          || github.ref == 'refs/heads/test/v0-integration'
+          || github.ref == 'refs/heads/v0/integration-dashboard'))
+      || (github.event_name == 'workflow_dispatch'
+        && (github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/test/cursor-agent-validation'
+          || github.ref == 'refs/heads/test/v0-integration'
+          || github.ref == 'refs/heads/v0/integration-dashboard'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # v5.1.0; SHA from https://api.github.com/repos/actions/checkout/git/refs/tags/v5
+      # and https://api.github.com/repos/actions/checkout/releases/tags/v5.1.0 (2026-07-20)
+      # action.yml runs.using: node24; persist-credentials input retained; min runner v2.327.1
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      # v5.0.0; SHA from https://api.github.com/repos/actions/setup-node/git/refs/tags/v5
+      # and https://api.github.com/repos/actions/setup-node/releases/tags/v5.0.0 (2025-09-04)
+      # action.yml runs.using: node24; min runner v2.327.1
+      # package-manager-cache: false preserves the previous no-cache behavior
+      # (v5 defaults cache on when package.json has packageManager).
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
