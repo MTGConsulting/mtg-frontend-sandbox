@@ -3,17 +3,18 @@
 ## Identity and status
 
 - Phase / task ID: 1.3C-B
-- Status: in progress (Stage A prepared; **integration merge commit not created**; Gate 1 pending)
+- Status: Gate 1 **complete** at `7a935860f93e18169343fad14329475cb7f94da4`. Gate 2 workflow-trigger change and this correction are prepared in the working tree and **not committed**.
+- Pre-commit status (preserved; superseded by the status line above and by the post-merge update): in progress (Stage A prepared; **integration merge commit not created**; Gate 1 pending)
 - Owner / execution tool: Dieudonne / Cursor Lead
 - Date: 2026-10-09
 - Branch: `cursor/phase-1-3c-ci-integration` (local only; not pushed)
 - Baseline ref and commit: governance `8617f3074c20d4376657a7cd0c2bba3e138fe49d`; CI `fbe2eb563863e185946e70603255cbbd94ae0c17`; merge-base `64006e86c62726326439e0a095f6b2e386822c7e`
-- Initial working-tree state and changes to preserve: active sandbox left on `test/cursor-agent-validation` @ `81e20a1c55b15a9533d271075c44893a5e5293e0` (clean). Isolated worktree holds an uncommitted `--no-ff` merge.
+- Initial working-tree state (pre-commit record, preserved): active sandbox left on `test/cursor-agent-validation` @ `81e20a1c55b15a9533d271075c44893a5e5293e0` (clean). Isolated worktree held an uncommitted `--no-ff` merge. That merge was later committed as `7a93586`.
 - Instructions read: `AGENTS.md`, ADR 0002, ADR 0003, branching, architecture-review, artifact-handoff, agent-authority, security, architecture, Phase 1.3B closure record
 
 ## Objective and authorized scope
 
-Prepare Option A: a non-fast-forward merge of the validated Phase 1.3B CI history into a branch created from the accepted governance baseline, preserving both parents. This file is the required task record. It is **not** part of the proposed merge commit. Workflow-trigger refinement (Stage B) is not started.
+Prepare Option A: a non-fast-forward merge of the validated Phase 1.3B CI history into a branch created from the accepted governance baseline, preserving both parents. Pre-commit record (preserved): this file was not yet part of a merge commit, and workflow-trigger refinement had not started. Both of those statements were later superseded: the file is in merge commit `7a93586`, and Gate 2 trigger preparation is uncommitted in the working tree.
 
 ## Task-level authority assignment
 
@@ -97,13 +98,11 @@ Isolated worktree, 2026-10-09. Node v24.21.0, npm 11.19.0, `NEXT_TELEMETRY_DISAB
 - New findings: none in application or audit beyond the inherited five highs.
 - Inherited risks: GHSA-vfj7-8cjw-p6xm OPEN—TRACKED; browser verification NOT VERIFIED; workflow triggers still Devin-branch-only until Stage B.
 - Pending: Codex review cannot start until Gate 1 creates a SHA. ChatGPT R2 is before Gate 5, not this gate.
-- Approval still required: Gate 1 merge commit. Gates 2–5 are not authorized by that approval.
-- Suggested next action: owner approves or rejects the merge commit message and parents below.
-- Changed files (staged, merge only): the seven listed in Provenance. This task record is untracked and must stay out of the merge commit unless the owner explicitly includes it later.
+- Pre-commit handoff (preserved): approval then required was the Gate 1 merge commit. The suggested next action was owner approval of that commit. The task record was untracked at that time. Those statements describe the index before `7a93586`, not the current branch tip.
 
 ## Provenance, architecture observations, and review status
 
-- Provenance: MTGConsulting/mtg-frontend-sandbox; branch `cursor/phase-1-3c-ci-integration` local; HEAD still `8617f3074c20d4376657a7cd0c2bba3e138fe49d`; MERGE_HEAD `fbe2eb563863e185946e70603255cbbd94ae0c17`; proposed first parent governance, second parent CI; index tree `037355a539e56372aee3cf9772d968342356a1e5`; not published.
+- Pre-commit provenance (preserved): MTGConsulting/mtg-frontend-sandbox; branch `cursor/phase-1-3c-ci-integration` local; HEAD was still `8617f3074c20d4376657a7cd0c2bba3e138fe49d`; MERGE_HEAD `fbe2eb563863e185946e70603255cbbd94ae0c17`; proposed first parent governance, second parent CI; index tree before the task record was staged `037355a539e56372aee3cf9772d968342356a1e5`; not published. That HEAD value is the first parent of the later merge commit, not the current tip.
 - Proposed merge commit message:
 
 ```
@@ -123,6 +122,17 @@ Workflow trigger redesign stays a separate commit.
   - A `tests/dashboard.test.tsx`
 - Architecture observations: AIR-0006 remains open (CI not yet on the governance baseline). No new AIR. No capability beyond the static dashboard plus offline tests. Duplicate check: AIR-0006 already covers missing CI on the governance line.
 - Delegation evidence: not started.
-- Independent Codex review of the exact SHA: not started (no commit SHA).
-- Architecture cross-review: PENDING until before protected-branch integration (Gate 5).
-- Approvals still required (owner): Gate 1, then separately Gates 2–5.
+- Pre-commit review status (preserved): independent Codex review had not started because no commit SHA existed yet. Architecture cross-review remained PENDING until before protected-branch integration. Approvals then still required were Gate 1 and, separately, Gates 2–5.
+
+## Post-merge update (2026-10-09)
+
+This section is the current state. The pre-commit sentences above are kept as the historical narrative and were accurate only before the merge commit.
+
+- Gate 1 **completed**. Merge commit: `7a935860f93e18169343fad14329475cb7f94da4`. Tree: `40e7c7616c011bfe564c65c5a45a2a037d9c371f`.
+- Verified parents, in order: `8617f3074c20d4376657a7cd0c2bba3e138fe49d` (governance) and `fbe2eb563863e185946e70603255cbbd94ae0c17` (validated CI). Neither parent was rewritten.
+- Diff versus the first parent at that commit: the seven CI-side files plus this task record.
+- Independent Codex review of `7a93586` (session `01a11f73-cff7-7a42-a392-49fc758542a4`): **WARN**. Structural checks passed. The WARN was stale pre-commit wording in this file (then at lines 6, 16, 102, and 106) that still described an uncommitted merge. Those sentences are now explicitly labeled pre-commit. This correction is not yet committed, so Codex has not reviewed it.
+- Gate 2 **preparation** (uncommitted working tree): `.github/workflows/ci-regression.yml` trigger and job `if` only. Same-repository pull requests targeting `main`, `test/cursor-agent-validation`, `test/v0-integration`, and `v0/integration-dashboard`; push and `workflow_dispatch` only on those four refs. No concurrency. Pins, Node 24, `ubuntu-24.04`, `contents: read`, `persist-credentials: false`, and non-deploying steps unchanged. Not a hosted-trigger proof.
+- AIR-0006 remains **open**. Level 2/2+ remains inactive. Five inherited high dev advisories remain OPEN—TRACKED.
+- Not authorized by this preparation: Gate 2 commit, push, pull request, protected-branch merge, ruleset or Vercel changes.
+- Approvals still required: Gate 2 commit, then separately Gates 3–5. ChatGPT R2 remains PENDING before Gate 5.

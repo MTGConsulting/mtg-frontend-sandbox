@@ -1,10 +1,23 @@
 name: Dashboard regression checks
 
+# pull_request.branches filters the PR base (target), not the head.
+# Default activity types are opened, synchronize, and reopened, so closing
+# or merging a PR does not emit a second pull_request run. The merge commit
+# is checked by the push event on the protected base instead.
 on:
   pull_request:
-    branches: [devin/phase-1-3b-ci-regression-tests]
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - test/cursor-agent-validation
+      - test/v0-integration
+      - v0/integration-dashboard
   push:
-    branches: [devin/phase-1-3b-ci-regression-tests]
+    branches:
+      - main
+      - test/cursor-agent-validation
+      - test/v0-integration
+      - v0/integration-dashboard
   workflow_dispatch:
 
 permissions:
@@ -15,7 +28,27 @@ env:
 
 jobs:
   checks:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/devin/phase-1-3b-ci-regression-tests'
+    # Same-repository PRs only: head.repo.full_name excludes forks.
+    # Push and workflow_dispatch run only on the four protected baselines.
+    # && and || are short-circuiting, so pull_request payload fields are
+    # not read for push or workflow_dispatch.
+    if: >-
+      (github.event_name == 'pull_request'
+        && github.event.pull_request.head.repo.full_name == github.repository
+        && (github.event.pull_request.base.ref == 'main'
+          || github.event.pull_request.base.ref == 'test/cursor-agent-validation'
+          || github.event.pull_request.base.ref == 'test/v0-integration'
+          || github.event.pull_request.base.ref == 'v0/integration-dashboard'))
+      || (github.event_name == 'push'
+        && (github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/test/cursor-agent-validation'
+          || github.ref == 'refs/heads/test/v0-integration'
+          || github.ref == 'refs/heads/v0/integration-dashboard'))
+      || (github.event_name == 'workflow_dispatch'
+        && (github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/test/cursor-agent-validation'
+          || github.ref == 'refs/heads/test/v0-integration'
+          || github.ref == 'refs/heads/v0/integration-dashboard'))
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
